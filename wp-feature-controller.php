@@ -1,4 +1,15 @@
 <?php
+/*
+Plugin Name: WP Feature Controller
+Plugin URI: 
+Description: Allows various WordPress core functionality to be configured.
+Version: 0.0.1
+Author: Dave Romsey
+Author URI:
+License: GPL
+*/
+
+
 /**
  * Disable various functionality bundled with WordPress.
  */
@@ -22,4 +33,14 @@ function wpfc_init() {
 	
 	// Remove WP version
 	remove_action( 'wp_head', 'wp_generator' );
+}
+
+
+/**
+ * Disable automatic emptying of the trash.
+ * 
+ */
+add_action( 'init', 'wpfc_remove_schedule_delete' );
+function wpfc_remove_schedule_delete() {
+	remove_action( 'wp_scheduled_delete', 'wpfc_remove_schedule_delete' );
 }
